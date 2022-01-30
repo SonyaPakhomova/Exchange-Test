@@ -5,7 +5,6 @@ import com.example.overonix.core.dto.mapper.ConversionDtoMapper;
 import com.example.overonix.core.dto.mapper.CurrencyDtoMapper;
 import com.example.overonix.core.model.Conversion;
 import com.example.overonix.core.model.Currency;
-import com.example.overonix.core.service.BestCurrencyRateService;
 import com.example.overonix.core.service.ConversionService;
 import com.example.overonix.core.service.CurrencyService;
 import com.example.overonix.core.util.HttpClient;
@@ -28,7 +27,6 @@ public class CurrencyController {
     private CurrencyDtoMapper currencyDtoMapper;
     private ConversionDtoMapper conversionDtoMapper;
     private ConversionService conversionService;
-    private BestCurrencyRateService bestCurrencyRateService;
     private static final Logger logger = LogManager.getLogger(CurrencyController.class);
 
     @GetMapping("/get_for_code")
@@ -55,7 +53,7 @@ public class CurrencyController {
     @GetMapping("/by_date")
     public CurrencyDto getExchangeRatesByTimeAndBaseCode(@RequestParam String date,
                                                          @RequestParam String baseCode) {
-        logger.info("etExchangeRatesByTimeAndBaseCode method in class CurrencyController was called with date "
+        logger.info("getExchangeRatesByTimeAndBaseCode method in class CurrencyController was called with date "
                 + date + " and base code " + baseCode);
         return currencyDtoMapper.toDto(currencyService.getByTimeAndBaseCode(parseToLocalDate(date), baseCode));
     }
